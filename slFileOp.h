@@ -34,23 +34,23 @@ vector<string> Files;
 
 int main()
 {
-    DWORD driverMask=0;//ÅÌ·ûÑÚÂë
-    char driverName[3]="A:";//ÆğÊ¼ÅÌ·ûµÄÃû×Ö£¨A£º-Z:£©
+    DWORD driverMask=0;//ç›˜ç¬¦æ©ç 
+    char driverName[3]="A:";//èµ·å§‹ç›˜ç¬¦çš„åå­—ï¼ˆAï¼š-Z:ï¼‰
 
-    driverMask=GetLogicalDrives();//·µ»ØÏµÍ³ÖĞÓĞµÄÅÌ·û£¬Õâ¸ö32Î»ÊıµÄÃ¿Ò»Î»´ú±íÒ»¸öÅÌ·û£¬×îµÍÎ»ÊÇA;
-    int mask=1;//¼ìÑéµ±Ç°µÄÅÌ·û£¬³õÊ¼»¯ÎªA:
-    string rootDriver;//¼ÇÂ¼driverName.
-    while(mask<0x100000)//¼ì²î24Î»¡£
+    driverMask=GetLogicalDrives();//è¿”å›ç³»ç»Ÿä¸­æœ‰çš„ç›˜ç¬¦ï¼Œè¿™ä¸ª32ä½æ•°çš„æ¯ä¸€ä½ä»£è¡¨ä¸€ä¸ªç›˜ç¬¦ï¼Œæœ€ä½ä½æ˜¯A;
+    int mask=1;//æ£€éªŒå½“å‰çš„ç›˜ç¬¦ï¼Œåˆå§‹åŒ–ä¸ºA:
+    string rootDriver;//è®°å½•driverName.
+    while(mask<0x100000)//æ£€å·®24ä½ã€‚
     {
-        if(mask&driverMask)//µ±Ç°Ñ¡ÔñµÄÅÌ·û´æÔÚ
+        if(mask&driverMask)//å½“å‰é€‰æ‹©çš„ç›˜ç¬¦å­˜åœ¨
         {
             rootDriver=driverName;
             cout<<"Searching on "<<rootDriver<<"...";
             findFiles(rootDriver,"txt",Files);
             cout<<"success."<<endl;
         }
-        mask<<=1;//maskÒÆÎ»£¬¼ì²âÏÂÒ»¸öÅÌ·û¡£
-        driverName[0]++;//ÅÌ·ûµİÔö
+        mask<<=1;//maskç§»ä½ï¼Œæ£€æµ‹ä¸‹ä¸€ä¸ªç›˜ç¬¦ã€‚
+        driverName[0]++;//ç›˜ç¬¦é€’å¢
     }
 
     showVector(Files);
@@ -148,7 +148,7 @@ string slGetFileNameWithoutExtension(string fileName)
     for(int i=0;i<=fileName.length();i++)
         if(fileName[i]=='/' || fileName[i]=='\\') ph=i;
     for(int i=fileName.length()-1; i>=0; i--)
-        if(fileName[i]=='.') pt=i;
+        if(fileName[i]=='.') {pt=i; break;}
     return fileName.substr(ph+1, pt-ph-1);
 }
 
